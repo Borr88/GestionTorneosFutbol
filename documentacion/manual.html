@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Uso - Torneo de Fútbol</title>
+    <style>
+        :root {
+            --bg-color: #5ecfcf;
+            --container-bg: #1b5a5a;
+            --accent-color: #ff9501;
+            --text-white: #ffffff;
+            --border-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgb(27, 90, 90);
+            color: rgb(255, 255, 255);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .manual-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: rgb(27, 90, 90);
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid rgb(255, 255, 255);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1, h2, h3 {
+            color: rgb(255, 149, 1);
+            border-bottom: 2px solid rgb(255, 149, 1);
+            padding-bottom: 10px;
+        }
+
+        h1 { text-align: center; font-size: 2.5em; text-transform: uppercase; }
+
+        .toc {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .toc ul { list-style: none; padding: 0; }
+        .toc li { margin-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.2); color: rgb(255, 255, 255); }
+        .toc a { color: rgb(255, 255, 255); text-decoration: none; font-weight: bold; }
+
+        .page-section {
+            margin-top: 50px;
+            padding-top: 20px;
+        }
+
+        .highlight-box {
+            background-color: rgba(255, 149, 1, 0.1);
+            border-left: 5px solid rgb(255, 149, 1);
+            padding: 15px;
+            margin: 20px 0;
+            color: rgb(255, 255, 255);
+        }
+
+        .button-desc {
+            font-weight: bold;
+            color: rgb(255, 149, 1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            opacity: 0.7;
+            color: rgb(255, 255, 255);
+        }
+
+        ul.button-list { list-style-type: "⚽ "; }
+        
+        p, li, ul, ol {
+            color: rgb(255, 255, 255);
+        }
+        
+        .toc {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+
+<div class="manual-container">
+    <h1>Manual de Uso de Aplicación</h1>
+
+    <div class="toc">
+        <h2>Índice</h2>
+        <ul>
+            <li>1. Cometido de la aplicación</li>
+            <li>2. Vista inicial</li>
+            <li>3. Vista Registrar Equipo</li>
+            <li>4. Vista Registrar Participante</li>
+            <li>5. Vista Equipo</li>
+            <li>6. Vista Participante</li>
+            <li>7. Vista Calendario</li>
+            <li>8. Vista Crear Partido</li>
+            <li>9. Vista Iniciar Partido</li>
+            <li>10. Guía</li>
+            <li>11. Vista Acerca de...</li>
+        </ul>
+    </div>
+
+    <div class="page-section">
+        <h2>1. Cometido de la aplicación</h2>
+        <p>El cometido de la aplicación es la <strong>gestión de torneos de fútbol</strong> con una clasificación por eliminatoria.</p>
+        <div class="highlight-box">
+            <p>Para hacer uso de sus funcionalidades, se deberán registrar primero los equipos y los participantes (jugadores o árbitros).</p>
+        </div>
+        <p>Tras el registro, se realiza el sorteo de partidos (mediante el método que escoja el organizador). Según salgan los resultados, se crean los enfrentamientos para que la base de datos registre los equipos, fechas y árbitros.</p>
+        <p>Tras configurar los octavos de final, se gestionan los eventos del partido (goles, asistencias, faltas, tarjetas...). Al finalizar, el programa pasa automáticamente al ganador a la siguiente fase.</p>
+    </div>
+
+    <div class="page-section">
+        <h2>2. Vista Inicial</h2>
+        <p>En la vista inicial se encuentra la <strong>tabla general de partidos</strong> y el avance del torneo.</p>
+        <h3>Opciones del Menú Superior:</h3>
+        <ul class="button-list">
+            <li><span class="button-desc">Nuevo:</span> Opciones de Registrar participante o Registrar equipo.</li>
+            <li><span class="button-desc">Listados:</span> Acceso a Participantes, Equipos y Calendario.</li>
+            <li><span class="button-desc">Gestión de torneo:</span> Crear partido e Iniciar partido.</li>
+            <li><span class="button-desc">Ayuda:</span> Guía y Acerca de...</li>
+        </ul>
+        <p>Barra de inicio rápida: Icono "home" (inicio), "reloj" (calendario) y "play" (iniciar partido).</p>
+    </div>
+
+    <div class="page-section">
+        <h2>3. Vista Registrar Equipo</h2>
+        <p>Permite registrar los equipos del torneo. Es <strong>imprescindible</strong> rellenar: nombre, curso, color de equipación y adjuntar el escudo.</p>
+        <h3>Botones principales:</h3>
+        <ul class="button-list">
+            <li><span class="button-desc">Registrar:</span> Guarda el registro del equipo.</li>
+            <li><span class="button-desc">Limpiar:</span> Borra el formulario actual.</li>
+            <li><span class="button-desc">Crear jugador:</span> Lleva a la pestaña de creación de participantes.</li>
+            <li><span class="button-desc">Cargar Escudo/Equipación:</span> Abre la ventana para adjuntar imágenes.</li>
+        </ul>
+    </div>
+
+    <div class="page-section">
+        <h2>4. Vista Registrar Participante</h2>
+        <p>Registro de jugadores y árbitros. Campos obligatorios: nombre, apellido, fecha de nacimiento, curso y tipo de participante.</p>
+        <ul class="button-list">
+            <li><span class="button-desc">Asignar Equipo/Partido:</span> Asocia al participante y guarda el registro simultáneamente.</li>
+            <li><span class="button-desc">Guardar cambios:</span> Guarda los datos en la base de datos.</li>
+            <li><span class="button-desc">Cargar Foto:</span> Abre el directorio para adjuntar la imagen.</li>
+        </ul>
+    </div>
+
+    <div class="page-section">
+        <h2>5. Vista Equipo</h2>
+        <p>Lista completa de equipos registrados con opciones de búsqueda, edición y visualización de estadísticas.</p>
+        <h3>Funcionalidades:</h3>
+        <ul class="button-list">
+            <li><span class="button-desc">Búsqueda:</span> Filtro por nombre de equipo o curso.</li>
+            <li><span class="button-desc">Editar:</span> Selecciona un equipo para modificar sus datos.</li>
+            <li><span class="button-desc">Eliminar:</span> Borra el equipo seleccionado (requiere confirmación).</li>
+        </ul>
+    </div>
+
+    <div class="page-section">
+        <h2>6. Vista Participante</h2>
+        <p>Gestión de jugadores y árbitros registrados con acceso a estadísticas individuales.</p>
+        <h3>Características:</h3>
+        <ul class="button-list">
+            <li><span class="button-desc">Filtros:</span> Búsqueda por nombre, apellido o curso.</li>
+            <li><span class="button-desc">Estadísticas:</span> Visualización de goles, asistencias, tarjetas y paradas por partido.</li>
+            <li><span class="button-desc">Historial:</span> Resumen total de estadísticas del participante.</li>
+        </ul>
+    </div>
+
+    <div class="page-section">
+        <h2>7. Vista Calendario</h2>
+        <p>Consulta de fechas de partidos programados.</p>
+        <p><strong>Automatización:</strong> Cuando dos equipos pasan de fase (ej. Octavos a Cuartos), se enfrentan automáticamente, pero la fecha debe asignarse manualmente en esta vista seleccionando el partido y pulsando "Asignar Fecha".</p>
+    </div>
+
+    <div class="page-section">
+        <h2>8. Vista Crear Partido</h2>
+        <p>Configuración de enfrentamientos entre equipos para las diferentes fases del torneo.</p>
+        <h3>Proceso:</h3>
+        <ul class="button-list">
+            <li><span class="button-desc">Seleccionar fase:</span> Octavos, Cuartos, Semifinal o Final.</li>
+            <li><span class="button-desc">Asignar equipos:</span> Elegir los dos equipos enfrentados.</li>
+            <li><span class="button-desc">Asignar árbitro:</span> Designar el árbitro del partido.</li>
+            <li><span class="button-desc">Fecha:</span> Programar cuándo se jugará el partido.</li>
+        </ul>
+    </div>
+
+    <div class="page-section">
+        <h2>9. Vista Iniciar Partido</h2>
+        <p>Gestión de sucesos en tiempo real durante el juego.</p>
+        <ul class="button-list">
+            <li><span class="button-desc">Registrar evento:</span> Guarda el suceso asociado a un jugador y minuto específico.</li>
+            <li><span class="button-desc">Finalizar partido:</span> Cierra el encuentro y mueve al ganador a la siguiente fase.</li>
+        </ul>
+        <div class="highlight-box" style="border-left-color: #ff0000;">
+            <p><strong>Nota:</strong> No se permite finalizar si hay empate; se requiere prórroga o penaltis.</p>
+        </div>
+    </div>
+
+    <div class="page-section">
+        <h2>10. Guía</h2>
+        <p>Esta sección (el documento actual) proporciona información detallada sobre todas las funcionalidades de la aplicación.</p>
+        <p>Accesible desde el menú <strong>Ayuda → Guía</strong>.</p>
+    </div>
+
+    <div class="page-section">
+        <h2>11. Vista Acerca de...</h2>
+        <p>Información básica de la aplicación:</p>
+        <ul>
+            <li><strong>Desarrollador:</strong> Boris Baldominos Gonzalez</li>
+            <li><strong>Curso:</strong> DAM 2 - 2° 25-26</li>
+            <li><strong>Módulo:</strong> Desarrollo de Interfaces (DI)</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        Manual generado para el sistema de gestión de torneos de fútbol 2025-2026.
+    </div>
+</div>
+
+</body>
+</html>

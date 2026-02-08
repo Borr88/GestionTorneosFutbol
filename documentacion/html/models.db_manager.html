@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module models.db_manager</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="models.html" class="white">models</a>.db_manager</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cborr1%5Cdesktop%5Cdam%202%5C2%C2%BA%2025-26%5Cdi%5Ctorneo_futbol%5Cmodels%5Cdb_manager.py">c:\users\borr1\desktop\dam 2\2º 25-26\di\torneo_futbol\models\db_manager.py</a></td></tr></table>
+    <p><span class="code">Módulo&nbsp;de&nbsp;gestión&nbsp;de&nbsp;base&nbsp;de&nbsp;datos&nbsp;para&nbsp;el&nbsp;sistema&nbsp;de&nbsp;torneos.<br>
+&nbsp;<br>
+Este&nbsp;módulo&nbsp;proporciona&nbsp;la&nbsp;clase&nbsp;<a href="#DatabaseManager">DatabaseManager</a>&nbsp;que&nbsp;maneja&nbsp;todas&nbsp;las&nbsp;<br>
+operaciones&nbsp;con&nbsp;la&nbsp;base&nbsp;de&nbsp;datos&nbsp;MySQL,&nbsp;incluyendo:<br>
+-&nbsp;Gestión&nbsp;de&nbsp;equipos<br>
+-&nbsp;Gestión&nbsp;de&nbsp;participantes<br>
+-&nbsp;Gestión&nbsp;de&nbsp;partidos&nbsp;y&nbsp;calendarios<br>
+-&nbsp;Cálculo&nbsp;de&nbsp;estadísticas<br>
+-&nbsp;Avance&nbsp;de&nbsp;equipos&nbsp;en&nbsp;el&nbsp;torneo<br>
+&nbsp;<br>
+Tablas&nbsp;de&nbsp;la&nbsp;base&nbsp;de&nbsp;datos:<br>
+-&nbsp;equipos:&nbsp;Información&nbsp;de&nbsp;los&nbsp;equipos&nbsp;participantes<br>
+-&nbsp;participantes:&nbsp;Jugadores&nbsp;asociados&nbsp;a&nbsp;equipos<br>
+-&nbsp;partidos:&nbsp;Enfrentamientos&nbsp;entre&nbsp;equipos<br>
+-&nbsp;estadisticas:&nbsp;Registro&nbsp;de&nbsp;eventos&nbsp;en&nbsp;cada&nbsp;partido<br>
+&nbsp;<br>
+Autor:&nbsp;Boris&nbsp;Baldominos&nbsp;González<br>
+Fecha:&nbsp;2025-2026</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="mysql.html">mysql</a><br>
+</td><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="models.db_manager.html#DatabaseManager">DatabaseManager</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DatabaseManager">class <strong>DatabaseManager</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Gestor&nbsp;centralizado&nbsp;de&nbsp;base&nbsp;de&nbsp;datos&nbsp;MySQL&nbsp;para&nbsp;el&nbsp;torneo.<br>
+&nbsp;<br>
+Esta&nbsp;clase&nbsp;implementa&nbsp;el&nbsp;patrón&nbsp;Singleton&nbsp;para&nbsp;gestionar&nbsp;la&nbsp;conexión<br>
+con&nbsp;MySQL&nbsp;y&nbsp;proporciona&nbsp;métodos&nbsp;para&nbsp;todas&nbsp;las&nbsp;operaciones&nbsp;CRUD&nbsp;sobre<br>
+equipos,&nbsp;participantes,&nbsp;partidos&nbsp;y&nbsp;estadísticas.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;host&nbsp;(str):&nbsp;Host&nbsp;del&nbsp;servidor&nbsp;MySQL<br>
+&nbsp;&nbsp;&nbsp;&nbsp;port&nbsp;(str):&nbsp;Puerto&nbsp;de&nbsp;conexión<br>
+&nbsp;&nbsp;&nbsp;&nbsp;user&nbsp;(str):&nbsp;Usuario&nbsp;de&nbsp;la&nbsp;base&nbsp;de&nbsp;datos<br>
+&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;(str):&nbsp;Contraseña&nbsp;del&nbsp;usuario<br>
+&nbsp;&nbsp;&nbsp;&nbsp;database&nbsp;(str):&nbsp;Nombre&nbsp;de&nbsp;la&nbsp;base&nbsp;de&nbsp;datos<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="DatabaseManager-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Inicializa&nbsp;el&nbsp;gestor&nbsp;de&nbsp;base&nbsp;de&nbsp;datos.<br>
+&nbsp;<br>
+Carga&nbsp;las&nbsp;credenciales&nbsp;desde&nbsp;el&nbsp;archivo&nbsp;.env,&nbsp;crea&nbsp;la&nbsp;base&nbsp;de&nbsp;datos<br>
+si&nbsp;no&nbsp;existe&nbsp;y&nbsp;inicializa&nbsp;las&nbsp;tablas&nbsp;necesarias.</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-actualizar_equipo"><strong>actualizar_equipo</strong></a>(
+    self,
+    equipo_id,
+    nombre,
+    curso,
+    color,
+    escudo_path,
+    equipacion_path
+)</dt><dd><span class="code">Actualiza&nbsp;los&nbsp;datos&nbsp;de&nbsp;un&nbsp;equipo&nbsp;existente</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-actualizar_fecha_partido"><strong>actualizar_fecha_partido</strong></a>(self, partido_id, fecha_hora)</dt><dd><span class="code">Actualiza&nbsp;la&nbsp;fecha&nbsp;de&nbsp;un&nbsp;partido</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-actualizar_goles_partido"><strong>actualizar_goles_partido</strong></a>(self, partido_id, goles_local, goles_visitante)</dt><dd><span class="code">Actualiza&nbsp;los&nbsp;goles&nbsp;de&nbsp;un&nbsp;partido</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-actualizar_participante"><strong>actualizar_participante</strong></a>(
+    self,
+    participante_id,
+    nombre,
+    apellido,
+    curso,
+    fecha_nacimiento,
+    posicion,
+    es_jugador,
+    es_arbitro,
+    foto_path,
+    equipo_id
+)</dt><dd><span class="code">Actualiza&nbsp;los&nbsp;datos&nbsp;de&nbsp;un&nbsp;participante&nbsp;existente</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-avanzar_equipo_siguiente_fase"><strong>avanzar_equipo_siguiente_fase</strong></a>(self, equipo_ganador_id, fase_actual, partido_id)</dt><dd><span class="code">Crea&nbsp;o&nbsp;actualiza&nbsp;el&nbsp;partido&nbsp;de&nbsp;la&nbsp;siguiente&nbsp;fase&nbsp;con&nbsp;el&nbsp;equipo&nbsp;ganador<br>
+&nbsp;<br>
+Respeta&nbsp;la&nbsp;estructura&nbsp;del&nbsp;bracket&nbsp;visual&nbsp;donde:<br>
+-&nbsp;Partidos&nbsp;consecutivos&nbsp;se&nbsp;emparejan&nbsp;en&nbsp;la&nbsp;siguiente&nbsp;fase<br>
+-&nbsp;Octavos&nbsp;pos&nbsp;0,1&nbsp;→&nbsp;Cuartos&nbsp;partido&nbsp;0&nbsp;|&nbsp;pos&nbsp;2,3&nbsp;→&nbsp;Cuartos&nbsp;partido&nbsp;1&nbsp;|&nbsp;etc.<br>
+-&nbsp;Cuartos&nbsp;pos&nbsp;0,1&nbsp;→&nbsp;Semi&nbsp;partido&nbsp;0&nbsp;|&nbsp;pos&nbsp;2,3&nbsp;→&nbsp;Semi&nbsp;partido&nbsp;1<br>
+-&nbsp;Semi&nbsp;pos&nbsp;0,1&nbsp;→&nbsp;Final</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-eliminar_equipo"><strong>eliminar_equipo</strong></a>(self, equipo_id)</dt><dd><span class="code">Elimina&nbsp;un&nbsp;equipo&nbsp;y&nbsp;sus&nbsp;participantes&nbsp;asociados</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-eliminar_participante"><strong>eliminar_participante</strong></a>(self, participante_id)</dt><dd><span class="code">Elimina&nbsp;un&nbsp;participante&nbsp;y&nbsp;sus&nbsp;estadísticas&nbsp;asociadas</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-get_connection"><strong>get_connection</strong></a>(self)</dt><dd><span class="code">Crea&nbsp;y&nbsp;retorna&nbsp;una&nbsp;conexión&nbsp;a&nbsp;la&nbsp;base&nbsp;de&nbsp;datos&nbsp;MySQL.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mysql.connector.connection.MySQLConnection:&nbsp;Objeto&nbsp;de&nbsp;conexión&nbsp;activa<br>
+&nbsp;&nbsp;&nbsp;&nbsp;None:&nbsp;Si&nbsp;ocurre&nbsp;un&nbsp;error&nbsp;de&nbsp;conexión</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-init_db"><strong>init_db</strong></a>(self)</dt><dd><span class="code">Crea&nbsp;las&nbsp;tablas&nbsp;del&nbsp;sistema&nbsp;si&nbsp;no&nbsp;existen.<br>
+&nbsp;<br>
+Crea&nbsp;las&nbsp;siguientes&nbsp;tablas:<br>
+-&nbsp;equipos:&nbsp;id,&nbsp;nombre_equipo,&nbsp;tutor<br>
+-&nbsp;participantes:&nbsp;id,&nbsp;nombre,&nbsp;apellido,&nbsp;edad,&nbsp;id_equipo<br>
+-&nbsp;partidos:&nbsp;id,&nbsp;id_equipo1,&nbsp;id_equipo2,&nbsp;fecha,&nbsp;ganador,&nbsp;fase<br>
+-&nbsp;estadisticas:&nbsp;id_participante,&nbsp;id_partido,&nbsp;goles,&nbsp;asistencias,&nbsp;etc.</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-insertar_equipo"><strong>insertar_equipo</strong></a>(self, nombre, curso, color, escudo_path, equipacion_path)</dt><dd><span class="code">Inserta&nbsp;un&nbsp;nuevo&nbsp;equipo&nbsp;y&nbsp;devuelve&nbsp;True&nbsp;si&nbsp;tuvo&nbsp;éxito</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-insertar_estadistica"><strong>insertar_estadistica</strong></a>(
+    self,
+    participante_id,
+    partido_id,
+    goles=0,
+    asistencias=0,
+    faltas=0,
+    amarillas=0,
+    rojas=0,
+    paradas=0
+)</dt><dd><span class="code">Inserta&nbsp;o&nbsp;actualiza&nbsp;una&nbsp;estadística&nbsp;en&nbsp;un&nbsp;partido</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-insertar_participante"><strong>insertar_participante</strong></a>(
+    self,
+    nombre,
+    apellido,
+    curso,
+    fecha_nacimiento,
+    posicion,
+    es_jugador,
+    es_arbitro,
+    foto_path,
+    equipo_id
+)</dt><dd><span class="code">Inserta&nbsp;un&nbsp;nuevo&nbsp;participante&nbsp;respetando&nbsp;la&nbsp;dualidad&nbsp;de&nbsp;roles</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-insertar_partido"><strong>insertar_partido</strong></a>(
+    self,
+    equipo_local_id,
+    equipo_visitante_id,
+    arbitro_id,
+    fecha_hora,
+    fase='Octavos'
+)</dt><dd><span class="code">Inserta&nbsp;un&nbsp;nuevo&nbsp;partido</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-marcar_partido_finalizado"><strong>marcar_partido_finalizado</strong></a>(self, partido_id)</dt><dd><span class="code">Marca&nbsp;un&nbsp;partido&nbsp;como&nbsp;finalizado</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_arbitros_disponibles"><strong>obtener_arbitros_disponibles</strong></a>(self, fecha)</dt><dd><span class="code">Obtiene&nbsp;árbitros&nbsp;que&nbsp;no&nbsp;tienen&nbsp;partido&nbsp;asignado&nbsp;en&nbsp;la&nbsp;fecha&nbsp;indicada</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_equipo_por_id"><strong>obtener_equipo_por_id</strong></a>(self, equipo_id)</dt><dd><span class="code">Obtiene&nbsp;los&nbsp;datos&nbsp;de&nbsp;un&nbsp;equipo&nbsp;específico</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_equipos"><strong>obtener_equipos</strong></a>(self)</dt><dd><span class="code">Devuelve&nbsp;una&nbsp;lista&nbsp;de&nbsp;tuplas&nbsp;(id,&nbsp;nombre)&nbsp;de&nbsp;todos&nbsp;los&nbsp;equipos</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_equipos_con_estadisticas"><strong>obtener_equipos_con_estadisticas</strong></a>(self, filtro_curso=None, filtro_nombre=None)</dt><dd><span class="code">Obtiene&nbsp;todos&nbsp;los&nbsp;equipos&nbsp;con&nbsp;sus&nbsp;estadísticas&nbsp;agregadas</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_estadisticas_participante"><strong>obtener_estadisticas_participante</strong></a>(self, participante_id)</dt><dd><span class="code">Obtiene&nbsp;el&nbsp;historial&nbsp;de&nbsp;estadísticas&nbsp;de&nbsp;un&nbsp;participante&nbsp;con&nbsp;fechas&nbsp;de&nbsp;partidos</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_estadisticas_por_partido"><strong>obtener_estadisticas_por_partido</strong></a>(self, partido_id, equipo_id)</dt><dd><span class="code">Obtiene&nbsp;las&nbsp;estadísticas&nbsp;de&nbsp;un&nbsp;equipo&nbsp;en&nbsp;un&nbsp;partido&nbsp;específico</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_jugadores_por_equipo"><strong>obtener_jugadores_por_equipo</strong></a>(self, equipo_id)</dt><dd><span class="code">Obtiene&nbsp;todos&nbsp;los&nbsp;jugadores&nbsp;de&nbsp;un&nbsp;equipo</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_participante_por_id"><strong>obtener_participante_por_id</strong></a>(self, participante_id)</dt><dd><span class="code">Obtiene&nbsp;los&nbsp;datos&nbsp;de&nbsp;un&nbsp;participante&nbsp;específico</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_participantes_con_estadisticas"><strong>obtener_participantes_con_estadisticas</strong></a>(
+    self,
+    filtro_curso=None,
+    filtro_nombre=None,
+    filtro_equipo=None,
+    filtro_tipo=None
+)</dt><dd><span class="code">Obtiene&nbsp;todos&nbsp;los&nbsp;participantes&nbsp;con&nbsp;sus&nbsp;estadísticas&nbsp;agregadas</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_participantes_por_equipo"><strong>obtener_participantes_por_equipo</strong></a>(self, equipo_id)</dt><dd><span class="code">Consulta&nbsp;los&nbsp;jugadores&nbsp;que&nbsp;pertenecen&nbsp;a&nbsp;un&nbsp;equipo&nbsp;específico</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_partido_por_id"><strong>obtener_partido_por_id</strong></a>(self, partido_id)</dt><dd><span class="code">Obtiene&nbsp;los&nbsp;datos&nbsp;completos&nbsp;de&nbsp;un&nbsp;partido</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_partidos_no_finalizados"><strong>obtener_partidos_no_finalizados</strong></a>(self)</dt><dd><span class="code">Obtiene&nbsp;todos&nbsp;los&nbsp;partidos&nbsp;que&nbsp;no&nbsp;han&nbsp;sido&nbsp;finalizados&nbsp;y&nbsp;tienen&nbsp;fecha&nbsp;asignada</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_partidos_por_fase"><strong>obtener_partidos_por_fase</strong></a>(self, fase=None)</dt><dd><span class="code">Obtiene&nbsp;los&nbsp;partidos&nbsp;filtrados&nbsp;por&nbsp;fase</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_resumen_estadisticas_participante"><strong>obtener_resumen_estadisticas_participante</strong></a>(self, participante_id)</dt><dd><span class="code">Obtiene&nbsp;el&nbsp;resumen&nbsp;total&nbsp;de&nbsp;estadísticas&nbsp;de&nbsp;un&nbsp;participante</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_todos_los_arbitros"><strong>obtener_todos_los_arbitros</strong></a>(self)</dt><dd><span class="code">Obtiene&nbsp;todos&nbsp;los&nbsp;árbitros&nbsp;registrados</span></dd></dl>
+
+<dl><dt><a name="DatabaseManager-obtener_ultimo_equipo_id"><strong>obtener_ultimo_equipo_id</strong></a>(self)</dt><dd><span class="code">Devuelve&nbsp;el&nbsp;ID&nbsp;del&nbsp;último&nbsp;equipo&nbsp;insertado</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

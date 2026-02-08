@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación - Torneo de Fútbol</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(27, 90, 90);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: rgb(255, 149, 1);
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: rgb(255, 149, 1);
+            border-bottom: 2px solid rgb(255, 149, 1);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .subtitle {
+            text-align: center;
+            color: rgb(94, 207, 207);
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .module-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .module-card {
+            background-color: rgba(94, 207, 207, 0.1);
+            border: 2px solid rgb(94, 207, 207);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        .module-card:hover {
+            background-color: rgba(94, 207, 207, 0.2);
+            border-color: rgb(255, 149, 1);
+            transform: translateY(-3px);
+        }
+        .module-card a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .module-card a:hover {
+            color: rgb(255, 149, 1);
+        }
+        .module-description {
+            color: rgb(200, 200, 200);
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+        .info-box {
+            background-color: rgba(255, 149, 1, 0.1);
+            border-left: 4px solid rgb(255, 149, 1);
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgb(94, 207, 207);
+            color: rgb(150, 150, 150);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚽ Documentación del Sistema de Torneo de Fútbol</h1>
+        <p class="subtitle">Documentación técnica generada con PyDoc</p>
+
+        <div class="info-box">
+            <strong>📚 Sobre esta documentación:</strong><br>
+            Esta documentación ha sido generada automáticamente utilizando PyDoc, la herramienta estándar de Python 
+            para crear documentación a partir de los docstrings del código fuente. Incluye información detallada 
+            sobre clases, métodos, funciones y módulos del proyecto.
+        </div>
+
+        <div class="section">
+            <h2>🚀 Módulo Principal</h2>
+            <div class="module-list">
+                <div class="module-card">
+                    <a href="main.html">main</a>
+                    <div class="module-description">
+                        Punto de entrada de la aplicación. Inicializa Qt, carga estilos y lanza la ventana principal.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗄️ Modelos (Models)</h2>
+            <div class="module-list">
+                <div class="module-card">
+                    <a href="models.db_manager.html">models.db_manager</a>
+                    <div class="module-description">
+                        Gestor de base de datos MySQL. Maneja todas las operaciones CRUD para equipos, participantes, 
+                        partidos y estadísticas. Implementa la lógica de negocio del torneo.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎮 Controladores (Controllers)</h2>
+            <div class="module-list">
+                <div class="module-card">
+                    <a href="controllers.main_controller.html">controllers.main_controller</a>
+                    <div class="module-description">
+                        Controlador principal que gestiona la ventana y navegación entre vistas. Coordina el tablero 
+                        del torneo y todos los sub-controladores.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.equipo_controller.html">controllers.equipo_controller</a>
+                    <div class="module-description">
+                        Gestiona el registro y edición de equipos. Permite crear, modificar y eliminar equipos del torneo.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.participante_controller.html">controllers.participante_controller</a>
+                    <div class="module-description">
+                        Controla el registro de participantes/jugadores. Gestiona datos personales, estadísticas y 
+                        asignación a equipos.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.listado_equipos_controller.html">controllers.listado_equipos_controller</a>
+                    <div class="module-description">
+                        Muestra el listado completo de equipos registrados con opciones de búsqueda y filtrado.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.listado_participantes_controller.html">controllers.listado_participantes_controller</a>
+                    <div class="module-description">
+                        Lista todos los participantes con funcionalidad de edición, eliminación y visualización de estadísticas.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.enfrentamiento_controller.html">controllers.enfrentamiento_controller</a>
+                    <div class="module-description">
+                        Gestiona los enfrentamientos entre equipos. Permite crear partidos y registrar resultados.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.eventos_partido_controller.html">controllers.eventos_partido_controller</a>
+                    <div class="module-description">
+                        Registra eventos individuales durante los partidos: goles, asistencias, tarjetas, etc.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.calendario_controller.html">controllers.calendario_controller</a>
+                    <div class="module-description">
+                        Muestra el calendario de partidos organizados por fechas y fases del torneo.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.creditos_controller.html">controllers.creditos_controller</a>
+                    <div class="module-description">
+                        Vista "Acerca de" con información del desarrollador, versión y tecnologías utilizadas.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="controllers.guia_controller.html">controllers.guia_controller</a>
+                    <div class="module-description">
+                        Manual de usuario en HTML con botón para abrir la versión PDF completa.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📖 Documentación Adicional</h2>
+            <div class="module-list">
+                <div class="module-card">
+                    <a href="../DOCUMENTACION.md" target="_blank">DOCUMENTACION.md</a>
+                    <div class="module-description">
+                        Documentación técnica completa en Markdown: arquitectura, base de datos, patrones y guías.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="../manual.html" target="_blank">Manual de Usuario (HTML)</a>
+                    <div class="module-description">
+                        Manual interactivo para usuarios finales con guías paso a paso de todas las funcionalidades.
+                    </div>
+                </div>
+                <div class="module-card">
+                    <a href="../../README.md" target="_blank">README.md</a>
+                    <div class="module-description">
+                        Descripción general del proyecto, requisitos, instalación y configuración inicial.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>💡 Consejos para navegar:</strong><br>
+            • Haz clic en cualquier módulo para ver su documentación completa<br>
+            • Cada página de PyDoc incluye información sobre clases, métodos, atributos y dependencias<br>
+            • Los enlaces dentro de las páginas te permiten navegar entre módulos relacionados<br>
+            • Usa la función de búsqueda de tu navegador (Ctrl+F) para encontrar clases o métodos específicos
+        </div>
+
+        <div class="footer">
+            <p><strong>Torneo de Fútbol - Sistema de Gestión</strong></p>
+            <p>Desarrollado por Boris Baldominos González | DAM 2º 2025-2026</p>
+            <p>Tecnologías: Python 3.8+ | PySide6 | MySQL 8.0+ | Qt Designer</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">
+                Documentación generada con PyDoc | 
+                <a href="https://hektorprofe.github.io/python/documentacion-y-pruebas/pydoc/" 
+                   style="color: rgb(94, 207, 207);" target="_blank">Aprende más sobre PyDoc</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

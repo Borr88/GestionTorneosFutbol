@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/images">
+    <file>campo_derecho.jpg</file>
+    <file>campo_izquierdo.jpg</file>
+    <file>campo.jpg</file>
+  </qresource>
+</RCC>
