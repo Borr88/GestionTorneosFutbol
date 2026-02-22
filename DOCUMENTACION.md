@@ -32,9 +32,11 @@ Sistema integral para la gestión de torneos de fútbol con sistema de eliminato
 |------------|-----------|---------|-----------|
 | Lenguaje | Python | 3.8+ | Lógica de negocio |
 | Framework GUI | PySide6 | 6.x | Interfaz gráfica |
-| Base de Datos | MySQL | 8.0+ | Persistencia de datos |
-| Conector DB | mysql-connector-python | 8.x | Comunicación con BD |
+| Base de Datos | SQLite | 3 | Persistencia de datos (archivo local) |
+| Conector DB | sqlite3 | Built-in | Comunicación con BD (stdlib Python) |
 | Diseño UI | Qt Designer | 6.x | Diseño visual |
+| Informes PDF | JasperReports | 6.20.6 | Motor de generación de informes |
+| Wrapper Jasper | PyReportJasper | 2.x | Ejecución de reportes desde Python |
 
 ---
 
@@ -66,7 +68,7 @@ El proyecto implementa una arquitectura MVC estricta:
                   │
           ┌───────▼────────┐
           │   BASE DATOS   │
-          │     MySQL      │
+          │     SQLite     │
           └────────────────┘
 ```
 
@@ -90,6 +92,7 @@ Cada módulo tiene su controlador dedicado:
 | `eventos_partido_controller.py` | Registro de eventos en tiempo real |
 | `listado_equipos_controller.py` | Listados, búsquedas, edición |
 | `listado_participantes_controller.py` | Listados, filtros, edición |
+| `informes_controller.py` | Generación de informes PDF con JasperReports |
 | `creditos_controller.py` | Vista "Acerca de" |
 | `guia_controller.py` | Visualizador de manual HTML/PDF |
 
@@ -108,57 +111,59 @@ Cada módulo tiene su controlador dedicado:
 ```sql
 -- Tabla de equipos
 CREATE TABLE equipos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    curso VARCHAR(50),
-    color VARCHAR(50),
-    escudo VARCHAR(255),
-    equipacion VARCHAR(255),
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    curso TEXT,
+    color TEXT,
+    escudo TEXT,
+    equipacion TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla de participantes
 CREATE TABLE participantes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    curso VARCHAR(50),
-    fecha_nacimiento DATE,
-    posicion VARCHAR(50),
-    es_jugador BOOLEAN DEFAULT TRUE,
-    es_arbitro BOOLEAN DEFAULT FALSE,
-    foto VARCHAR(255),
-    equipo_id INT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    curso TEXT,
+    fecha_nacimiento TEXT,
+    posicion TEXT,
+    es_jugador INTEGER DEFAULT 1,
+    es_arbitro INTEGER DEFAULT 0,
+    foto TEXT,
+    equipo_id INTEGER,
     FOREIGN KEY (equipo_id) REFERENCES equipos(id) ON DELETE SET NULL
 );
 
 -- Tabla de partidos
 CREATE TABLE partidos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    equipo1_id INT NOT NULL,
-    equipo2_id INT NOT NULL,
-    fase VARCHAR(50) NOT NULL,
-    fecha_hora DATETIME,
-    arbitro_id INT,
-    ganador_id INT,
-    finalizado BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (equipo1_id) REFERENCES equipos(id),
-    FOREIGN KEY (equipo2_id) REFERENCES equipos(id),
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    equipo_local_id INTEGER NOT NULL,
+    equipo_visitante_id INTEGER NOT NULL,
+    fase TEXT NOT NULL,
+    fecha_hora TEXT,
+    arbitro_id INTEGER,
+    ganador_id INTEGER,
+    goles_local INTEGER DEFAULT 0,
+    goles_visitante INTEGER DEFAULT 0,
+    finalizado INTEGER DEFAULT 0,
+    FOREIGN KEY (equipo_local_id) REFERENCES equipos(id),
+    FOREIGN KEY (equipo_visitante_id) REFERENCES equipos(id),
     FOREIGN KEY (arbitro_id) REFERENCES participantes(id),
     FOREIGN KEY (ganador_id) REFERENCES equipos(id)
 );
 
 -- Tabla de estadísticas
 CREATE TABLE estadisticas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    participante_id INT NOT NULL,
-    partido_id INT NOT NULL,
-    goles INT DEFAULT 0,
-    asistencias INT DEFAULT 0,
-    faltas INT DEFAULT 0,
-    amarillas INT DEFAULT 0,
-    rojas INT DEFAULT 0,
-    paradas INT DEFAULT 0,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    participante_id INTEGER NOT NULL,
+    partido_id INTEGER NOT NULL,
+    goles INTEGER DEFAULT 0,
+    asistencias INTEGER DEFAULT 0,
+    faltas INTEGER DEFAULT 0,
+    amarillas INTEGER DEFAULT 0,
+    rojas INTEGER DEFAULT 0,
+    paradas INTEGER DEFAULT 0,
     fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (participante_id) REFERENCES participantes(id) ON DELETE CASCADE,
     FOREIGN KEY (partido_id) REFERENCES partidos(id) ON DELETE CASCADE
@@ -430,24 +435,15 @@ def obtener_estadisticas_por_partido(partido_id):
 # En models/db_manager.py
 def nuevo_metodo(self, parametro):
     """Descripción del método"""
-    conn = self.get_connection()
-    if not conn:
-        return None
-    
     try:
-        cursor = conn.cursor()
+        cursor = self.conn.cursor()
         cursor.execute("""
-            SELECT * FROM tabla WHERE campo = %s
+            SELECT * FROM tabla WHERE campo = ?
         """, (parametro,))
-        resultado = cursor.fetchall()
-        return resultado
-    except Error as e:
+        return cursor.fetchall()
+    except Exception as e:
         print(f"Error: {e}")
         return None
-    finally:
-        if conn.is_connected():
-            cursor.close()
-            conn.close()
 ```
 
 ---
@@ -533,7 +529,10 @@ finally:
 - [Documentación oficial PySide6](https://doc.qt.io/qtforpython/)
 - [Qt Designer Manual](https://doc.qt.io/qt-6/qtdesigner-manual.html)
 - [Guía Qt/PySide - Héctor Costa](https://hektorprofe.github.io/qt-pyside/)
-- [MySQL Connector Python](https://dev.mysql.com/doc/connector-python/en/)
+- [SQLite Documentation](https://www.sqlite.org/docs.html)
+- [Python sqlite3 — DB-API 2.0](https://docs.python.org/3/library/sqlite3.html)
+- [PyReportJasper](https://github.com/jadsonbr/pyreportjasper)
+- [JasperReports 6.20.6](https://community.jaspersoft.com/)
 
 ---
 

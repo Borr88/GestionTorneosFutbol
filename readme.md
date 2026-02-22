@@ -336,57 +336,59 @@ equipos (1) ──────< (N) participantes
 ```sql
 -- Tabla de equipos
 CREATE TABLE equipos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    curso VARCHAR(50),
-    color VARCHAR(50),
-    escudo VARCHAR(255),
-    equipacion VARCHAR(255),
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    curso TEXT,
+    color TEXT,
+    escudo TEXT,
+    equipacion TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla de participantes
 CREATE TABLE participantes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    curso VARCHAR(50),
-    fecha_nacimiento DATE,
-    posicion VARCHAR(50),
-    es_jugador BOOLEAN DEFAULT TRUE,
-    es_arbitro BOOLEAN DEFAULT FALSE,
-    foto VARCHAR(255),
-    equipo_id INT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    curso TEXT,
+    fecha_nacimiento TEXT,
+    posicion TEXT,
+    es_jugador INTEGER DEFAULT 1,
+    es_arbitro INTEGER DEFAULT 0,
+    foto TEXT,
+    equipo_id INTEGER,
     FOREIGN KEY (equipo_id) REFERENCES equipos(id) ON DELETE SET NULL
 );
 
 -- Tabla de partidos
 CREATE TABLE partidos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    equipo1_id INT NOT NULL,
-    equipo2_id INT NOT NULL,
-    fase VARCHAR(50) NOT NULL,
-    fecha_hora DATETIME,
-    arbitro_id INT,
-    ganador_id INT,
-    finalizado BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (equipo1_id) REFERENCES equipos(id),
-    FOREIGN KEY (equipo2_id) REFERENCES equipos(id),
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    equipo_local_id INTEGER NOT NULL,
+    equipo_visitante_id INTEGER NOT NULL,
+    fase TEXT NOT NULL,
+    fecha_hora TEXT,
+    arbitro_id INTEGER,
+    ganador_id INTEGER,
+    goles_local INTEGER DEFAULT 0,
+    goles_visitante INTEGER DEFAULT 0,
+    finalizado INTEGER DEFAULT 0,
+    FOREIGN KEY (equipo_local_id) REFERENCES equipos(id),
+    FOREIGN KEY (equipo_visitante_id) REFERENCES equipos(id),
     FOREIGN KEY (arbitro_id) REFERENCES participantes(id),
     FOREIGN KEY (ganador_id) REFERENCES equipos(id)
 );
 
 -- Tabla de estadísticas
 CREATE TABLE estadisticas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    participante_id INT NOT NULL,
-    partido_id INT NOT NULL,
-    goles INT DEFAULT 0,
-    asistencias INT DEFAULT 0,
-    faltas INT DEFAULT 0,
-    amarillas INT DEFAULT 0,
-    rojas INT DEFAULT 0,
-    paradas INT DEFAULT 0,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    participante_id INTEGER NOT NULL,
+    partido_id INTEGER NOT NULL,
+    goles INTEGER DEFAULT 0,
+    asistencias INTEGER DEFAULT 0,
+    faltas INTEGER DEFAULT 0,
+    amarillas INTEGER DEFAULT 0,
+    rojas INTEGER DEFAULT 0,
+    paradas INTEGER DEFAULT 0,
     fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (participante_id) REFERENCES participantes(id) ON DELETE CASCADE,
     FOREIGN KEY (partido_id) REFERENCES partidos(id) ON DELETE CASCADE
@@ -398,6 +400,11 @@ CREATE TABLE estadisticas (
 ### Error: "No module named 'PySide6'"
 ```bash
 pip install PySide6
+```
+
+### Error: "No module named 'pyreportjasper'"
+```bash
+pip install pyreportjasper
 ```
 
 ### Error: "No se puede abrir la base de datos"
