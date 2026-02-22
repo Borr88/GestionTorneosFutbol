@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partidos" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="058c7b6f-9a75-48ca-aa95-b629710990d5">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexion_SQLite_Torneo"/>
+	<parameter name="FASE" class="java.lang.String"/>
+	<queryString language="SQL"><![CDATA[SELECT 
+    p.id AS id_partido,
+    p.fase AS fase,
+    substr(p.fecha_hora, 9, 2) || '-' || substr(p.fecha_hora, 6, 2) || '-' || substr(p.fecha_hora, 1, 4) AS fecha_partido, 
+    el.nombre AS equipo_local,
+    el.escudo_path AS escudo_local,
+    p.goles_local AS goles_local,
+    p.goles_visitante AS goles_visitante,
+    ev.nombre AS equipo_visitante,
+    ev.escudo_path AS escudo_visitante,
+    a.nombre ||' '|| a.apellido AS nombre_arbitro
+FROM 
+    partidos p
+INNER JOIN 
+    equipos el ON p.equipo_local_id = el.id
+INNER JOIN 
+    equipos ev ON p.equipo_visitante_id = ev.id
+ LEFT JOIN 
+    participantes a ON p.arbitro_id = a.id 
+WHERE 
+    ($P{FASE} IS NULL OR p.fase = $P{FASE})
+ORDER BY 
+    CASE p.fase 
+        WHEN 'Octavos' THEN 1 
+        WHEN 'Cuartos' THEN 2 
+        WHEN 'Semifinal' THEN 3 
+        WHEN 'Final' THEN 4 
+        ELSE 5 
+    END, p.fecha_hora, p.id
+]]></queryString>
+	<field name="id_partido" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_partido"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_partido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="partidos"/>
+	</field>
+	<field name="fase" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fase"/>
+		<property name="com.jaspersoft.studio.field.label" value="fase"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="partidos"/>
+	</field>
+	<field name="fecha_partido" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_partido"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_partido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="partidos"/>
+	</field>
+	<field name="equipo_local" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="equipo_local"/>
+		<property name="com.jaspersoft.studio.field.label" value="equipo_local"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipos"/>
+	</field>
+	<field name="escudo_local" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="escudo_local"/>
+		<property name="com.jaspersoft.studio.field.label" value="escudo_local"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipos"/>
+	</field>
+	<field name="goles_local" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="goles_local"/>
+		<property name="com.jaspersoft.studio.field.label" value="goles_local"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="partidos"/>
+	</field>
+	<field name="goles_visitante" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="goles_visitante"/>
+		<property name="com.jaspersoft.studio.field.label" value="goles_visitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="partidos"/>
+	</field>
+	<field name="equipo_visitante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="equipo_visitante"/>
+		<property name="com.jaspersoft.studio.field.label" value="equipo_visitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipos"/>
+	</field>
+	<field name="escudo_visitante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="escudo_visitante"/>
+		<property name="com.jaspersoft.studio.field.label" value="escudo_visitante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipos"/>
+	</field>
+	<field name="nombre_arbitro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre_arbitro"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre_arbitro"/>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="802" backcolor="#5ECFCF" uuid="92543dc8-8e0b-4190-b7a5-b20df08a5d0c"/>
+				<graphicElement><pen lineWidth="0.0"/></graphicElement>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="16" width="220" height="52" uuid="cc1e829a-8745-4b99-b94e-182093178a6f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partidos y resultados]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="410" y="27" width="120" height="20" forecolor="#267E7E" uuid="a1b2c3d4-0001-0001-0001-000000000001"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="146" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="105" y="80" width="100" height="30" forecolor="#FFFFFF" backcolor="#267E7E" uuid="a9702c45-2b6d-4d5c-bba4-41e7edfad7be"/>
+				<box><pen lineWidth="1.5" lineStyle="Solid"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equipo_local}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="130" y="30" width="50" height="50" uuid="7d5f85cd-4609-4b7c-ba7b-db4687d17b64"/>
+				<imageExpression><![CDATA[$F{escudo_local}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement mode="Opaque" x="355" y="80" width="100" height="30" forecolor="#FFFFFF" backcolor="#267E7E" uuid="c9e14d99-8e7c-452b-b2f9-3d27c649922d"/>
+				<box><pen lineWidth="1.5" lineStyle="Solid"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equipo_visitante}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="380" y="30" width="50" height="50" uuid="aa20075a-2849-4137-b292-ed11eba2c9c2"/>
+				<imageExpression><![CDATA[$F{escudo_visitante}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement mode="Transparent" x="211" y="69" width="44" height="33" forecolor="#267E7E" uuid="1c26251f-4d3e-4477-9917-fc5a23e8085f"/>
+				<box><pen lineWidth="0.0" lineStyle="Solid"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{goles_local}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="305" y="70" width="44" height="30" forecolor="#267E7E" uuid="06312d0b-e7d0-48c7-a783-5e45d2225b5f"/>
+				<box><pen lineWidth="0.0" lineStyle="Solid"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{goles_visitante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="255" y="73" width="50" height="24" forecolor="#267E7E" uuid="c4601808-d680-4554-92d7-31d1868207c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="230" y="43" width="100" height="30" forecolor="#267E7E" uuid="27359416-c4f4-4f1a-aa7d-0ce9d8f8b583"/>
+				<box><pen lineWidth="0.0" lineStyle="Solid"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_partido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="102" width="136" height="30" forecolor="#949494" uuid="53f3b40e-2e41-4ff3-bc56-48148d8da070"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Brush Script MT" size="19" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_arbitro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="510" y="20" width="29" height="30" forecolor="#FFFFFF" backcolor="#267E7E" uuid="a1b2c3d4-0002-0002-0002-000000000002"/>
+				<box><pen lineWidth="1.0"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

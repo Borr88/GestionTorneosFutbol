@@ -23,6 +23,7 @@ from controllers.enfrentamiento_controller import EnfrentamientoController
 from controllers.calendario_controller import CalendarioController
 from controllers.creditos_controller import CreditosController
 from controllers.guia_controller import GuiaController
+from controllers.informes_controller import InformesController
 from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt
 
@@ -107,6 +108,7 @@ class MainController(QMainWindow):
         self.ui.actionParticipantes.triggered.connect(self.mostrar_listado_participantes)
         self.ui.actionEquipos.triggered.connect(self.mostrar_listado_equipos)
         self.ui.actionInicio_Partido.triggered.connect(self.mostrar_eventos_partido)
+        self.ui.actionInformes.triggered.connect(self.abrir_ventana_informes)
         self.ui.actionCrear_partido.triggered.connect(self.mostrar_enfrentamientos)
         self.ui.actionCalendario.triggered.connect(self.mostrar_calendario)
         self.ui.actionInicio.triggered.connect(self.mostrar_inicio)
@@ -171,6 +173,10 @@ class MainController(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.vista_guia.widget)
         self.ui.titulo.setText("📖 Guía de Usuario 📖")
 
+    def abrir_ventana_informes(self): 
+        self.vista_informes = InformesController(db=self.db, parent=self)
+        self.vista_informes.exec()  
+
     def actualizar_tablero_inicio(self):
         """Consulta la DB y actualiza los labels de la pantalla principal con los partidos"""
         # Limpiar todos los labels primero
@@ -219,7 +225,7 @@ class MainController(QMainWindow):
                     conn = self.db.get_connection()
                     if conn:
                         cursor = conn.cursor()
-                        cursor.execute("SELECT finalizado FROM partidos WHERE id = %s", (partido[0],))
+                        cursor.execute("SELECT finalizado FROM partidos WHERE id = ?", (partido[0],))
                         resultado = cursor.fetchone()
                         cursor.close()
                         conn.close()
@@ -269,7 +275,7 @@ class MainController(QMainWindow):
                     conn = self.db.get_connection()
                     if conn:
                         cursor = conn.cursor()
-                        cursor.execute("SELECT finalizado FROM partidos WHERE id = %s", (partido[0],))
+                        cursor.execute("SELECT finalizado FROM partidos WHERE id = ?", (partido[0],))
                         resultado = cursor.fetchone()
                         cursor.close()
                         conn.close()
@@ -314,7 +320,7 @@ class MainController(QMainWindow):
                     conn = self.db.get_connection()
                     if conn:
                         cursor = conn.cursor()
-                        cursor.execute("SELECT finalizado FROM partidos WHERE id = %s", (partido[0],))
+                        cursor.execute("SELECT finalizado FROM partidos WHERE id = ?", (partido[0],))
                         resultado = cursor.fetchone()
                         cursor.close()
                         conn.close()
@@ -334,7 +340,7 @@ class MainController(QMainWindow):
                 conn = self.db.get_connection()
                 if conn:
                     cursor = conn.cursor()
-                    cursor.execute("SELECT finalizado FROM partidos WHERE id = %s", (partido_final_8[0],))
+                    cursor.execute("SELECT finalizado FROM partidos WHERE id = ?", (partido_final_8[0],))
                     resultado = cursor.fetchone()
                     cursor.close()
                     conn.close()
@@ -374,7 +380,7 @@ class MainController(QMainWindow):
                 conn = self.db.get_connection()
                 if conn:
                     cursor = conn.cursor()
-                    cursor.execute("SELECT finalizado FROM partidos WHERE id = %s", (partido_final[0],))
+                    cursor.execute("SELECT finalizado FROM partidos WHERE id = ?", (partido_final[0],))
                     resultado = cursor.fetchone()
                     cursor.close()
                     conn.close()

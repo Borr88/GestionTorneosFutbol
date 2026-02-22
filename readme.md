@@ -1,10 +1,11 @@
 # ⚽ Sistema de Gestión de Torneos de Fútbol
 
-Sistema de gestión completo para torneos de fútbol con clasificación por eliminatoria, desarrollado con **PySide6** (Qt for Python) y **MySQL**.
+Sistema de gestión completo para torneos de fútbol con clasificación por eliminatoria, desarrollado con **PySide6** (Qt for Python) y **SQLite**.
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![PySide6](https://img.shields.io/badge/PySide6-6.x-green.svg)
-![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange.svg)
+![SQLite](https://img.shields.io/badge/SQLite-3-blue.svg)
+![JasperReports](https://img.shields.io/badge/JasperReports-6.20.6-orange.svg)
 ![License](https://img.shields.io/badge/License-Educational-purple.svg)
 
 ## 📋 Descripción
@@ -19,20 +20,27 @@ Aplicación de escritorio para la gestión integral de torneos de fútbol con si
 - 📅 **Calendario Automático**: Asignación de fechas para partidos
 - 🎮 **Eventos en Tiempo Real**: Registro de goles, asistencias, tarjetas, faltas y paradas
 - 📊 **Estadísticas Automáticas**: Seguimiento individual y por equipo
-- 📖 **Manual Integrado**: Guía de usuario en HTML/PDF
+- � **Generación de Informes PDF**: Tres tipos de informe (Equipos y Jugadores, Partidos y Resultados, Clasificación y Eliminatorias) generados con JasperReports vía PyReportJasper
+- �📖 **Manual Integrado**: Guía de usuario en HTML/PDF
 - 🎨 **Interfaz Moderna**: Diseño personalizado con Qt Designer
 
 ## 🛠️ Tecnologías Utilizadas
 
 ### Backend
 - **Python 3.8+**: Lenguaje principal
-- **MySQL 8.0+**: Base de datos relacional
-- **mysql-connector-python**: Conexión con base de datos
+- **SQLite 3**: Base de datos relacional embebida
+- **PyReportJasper**: Generación de informes PDF con JasperReports 6.20.6
+- **sqlite-jdbc**: Driver JDBC para conectar JasperReports con SQLite
 
 ### Frontend
 - **PySide6 (Qt 6.x)**: Framework de interfaz gráfica
-- **Qt Designer**: Diseño visual de interfaces
+- **Qt Designer**: Diseño visual de interfaces (.ui → .py)
 - **QSS (Qt Style Sheets)**: Estilos personalizados
+
+### Informes
+- **JasperReports 6.20.6**: Motor de generación de informes
+- **Jaspersoft Studio 7.x**: Diseño visual de plantillas `.jrxml`
+- **PyReportJasper**: Wrapper Python para ejecutar reportes Jasper
 
 ### Arquitectura
 - **Patrón MVC**: Separación Modelo-Vista-Controlador
@@ -58,12 +66,13 @@ torneo_futbol/
 │   ├── eventos_partido_controller.py # Eventos en tiempo real
 │   ├── listado_equipos_controller.py # Listados y estadísticas
 │   ├── listado_participantes_controller.py # Edición de participantes
+│   ├── informes_controller.py     # Generación de informes PDF
 │   ├── creditos_controller.py     # Ventana "Acerca de"
 │   └── guia_controller.py         # Visualizador de manual
 │
 ├── models/                         # Modelos (Acceso a datos)
 │   ├── __init__.py
-│   └── db_manager.py              # Gestor de base de datos MySQL
+│   └── db_manager.py              # Gestor de base de datos SQLite
 │
 ├── views/                          # Vistas
 │   ├── __init__.py
@@ -100,6 +109,12 @@ torneo_futbol/
 │   └── qss/                       # Hojas de estilo Qt
 │       ├── __init__.py
 │       └── style.qss             # Hoja de estilos principal
+│
+├── reports/                        # Plantillas y recursos de informes
+│   ├── equipos_jugadores.jrxml    # Informe de equipos y jugadores
+│   ├── partidos.jrxml             # Informe de partidos y resultados
+│   ├── clasificacion.jrxml        # Informe de clasificación y eliminatorias
+│   └── sqlite-jdbc.jar            # Driver JDBC para conexión SQLite→Jasper
 │
 └── imagenes/                       # Recursos Qt compilados
     ├── __init__.py
@@ -177,23 +192,14 @@ Puedes descargar iconos gratuitos de:
    Contenido de `requirements.txt`:
    ```
    PySide6>=6.10.0
-   mysql-connector-python>=8.0.0
-   python-dotenv>=1.0.0
+   pyreportjasper>=2.2.0
    ```
 
-5. **Configurar base de datos**
-   - Crear archivo `.env` en la raíz del proyecto:
-     ```env
-     DB_HOST=localhost
-     DB_USER=tu_usuario
-     DB_PASSWORD=tu_contraseña
-     DB_NAME=torneo_futbol_db
-     ```
-   
-   - Crear la base de datos en MySQL:
-     ```sql
-     CREATE DATABASE torneo_futbol_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-     ```
+   > **Requisito adicional**: Java 8 o superior debe estar instalado y accesible en el PATH para que JasperReports funcione.
+
+5. **Verificar base de datos**
+   - El archivo `torneo_futbol.db` (SQLite) se crea automáticamente en la raíz del proyecto al iniciar la aplicación.
+   - El driver JDBC `sqlite-jdbc.jar` debe estar en la carpeta `reports/` para la generación de informes.
 
 6. **Ejecutar la aplicación**
    ```bash
@@ -230,6 +236,17 @@ Puedes descargar iconos gratuitos de:
 - **Consultar Calendario**: `Listados → Calendario`
 - **Exportar Manual**: `Ayuda → Guía` → Botón "Abrir Manual en PDF"
 
+### Generación de Informes PDF
+
+1. Acceder a `Informes → Generar Informe`
+2. Seleccionar el tipo de informe en el desplegable:
+   - **Equipos y Jugadores**: Lista de equipos con sus jugadores. Permite filtrar por equipo.
+   - **Partidos y resultados**: Resultados y datos de cada partido. Permite filtrar por fase.
+   - **Clasificación y Eliminatorias**: Estadísticas globales del torneo y cuadro de honor. Permite filtrar por fase.
+3. Aplicar filtros opcionales (equipo o fase según el informe)
+4. Seleccionar la carpeta de destino
+5. Pulsar **Generar Informe PDF**
+
 ## 📦 Distribución (Crear .exe)
 
 ### Para Windows
@@ -240,20 +257,21 @@ pyinstaller --name="TorneoFutbol" ^
     --onefile ^
     --icon="resources/iconos/football.ico" ^
     --add-data "resources;resources" ^
-    --add-data "models/torneoFutbol_sqlite.db;models" ^
+    --add-data "reports;reports" ^
     main.py
 ```
 
-### Para Linux (crear .deb)
+> Los archivos `.jrxml` y `sqlite-jdbc.jar` deben incluirse en la carpeta `reports/` junto al ejecutable para que la generación de informes funcione correctamente.
 
-Primero crear el ejecutable:
+### Para Linux
+
 ```bash
 pyinstaller --name="torneoFutbol" \
     --windowed \
     --onefile \
     --icon="resources/iconos/football.png" \
     --add-data "resources:resources" \
-    --add-data "models/torneoFutbol_sqlite.db:models" \
+    --add-data "reports:reports" \
     main.py
 ```
 
@@ -296,7 +314,7 @@ pyside6-rcc imagenes/recursos.qrc -o imagenes/recursos_rc.py
 
 - **equipos**: Información de equipos (nombre, color, escudo, equipación)
 - **participantes**: Jugadores y árbitros (datos personales, foto, tipo)
-- **partidos**: Enfrentamientos (equipos, fase, fecha, árbitro, ganador)
+- **partidos**: Enfrentamientos (equipos, fase, fecha, árbitro, resultado, ganador)
 - **estadisticas**: Eventos por participante y partido (goles, asistencias, tarjetas, etc.)
 
 ### Diagrama de Relaciones
@@ -383,7 +401,14 @@ pip install PySide6
 ```
 
 ### Error: "No se puede abrir la base de datos"
-Verifica que el archivo `torneoFutbol_sqlite.db` existe en la carpeta `models/`
+Verifica que el archivo `torneo_futbol.db` existe en la raíz del proyecto
+
+### Error al generar informe PDF: "input file ... is not a valid jrxml file"
+- Asegúrate de que los archivos `.jrxml` en `reports/` son compatibles con JasperReports 6.x
+- Verifica que `sqlite-jdbc.jar` está en la carpeta `reports/`
+
+### Error al generar informe PDF: "java not found" / proceso no inicia
+- Instala Java 8 o superior y añádelo al PATH del sistema
 
 ### Los iconos no se muestran
 - Verifica que las rutas a los iconos sean correctas
@@ -415,6 +440,7 @@ python main.py
 - ✅ Confirmaciones para acciones destructivas
 - ✅ Retroalimentación visual al usuario
 - ✅ Código documentado con docstrings
+- ✅ Generación de informes PDF con JasperReports
 
 ### Características Técnicas
 
@@ -425,7 +451,8 @@ python main.py
 - 🔔 Notificaciones al usuario (QMessageBox)
 - 📊 Generación automática de estadísticas
 - 🔄 Avance automático entre fases
-- 📖 Manual de usuario integrado
+- � Informes PDF con filtrado por equipo/fase via JasperReports
+- �📖 Manual de usuario integrado
 
 ## 👨‍💻 Autor
 

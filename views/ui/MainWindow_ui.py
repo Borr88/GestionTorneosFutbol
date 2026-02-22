@@ -61,6 +61,8 @@ class Ui_MainWindow(object):
         icon2 = QIcon(QIcon.fromTheme(u"go-home"))
         self.actionInicio.setIcon(icon2)
         self.actionInicio.setMenuRole(QAction.MenuRole.NoRole)
+        self.actionInformes = QAction(MainWindow)
+        self.actionInformes.setObjectName(u"actionInformes")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -102,10 +104,7 @@ class Ui_MainWindow(object):
         self.label_equipo1.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_37.addWidget(self.label_equipo1)
 
@@ -119,10 +118,7 @@ class Ui_MainWindow(object):
         self.label_equipo2.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_37.addWidget(self.label_equipo2)
 
@@ -164,10 +160,7 @@ class Ui_MainWindow(object):
         self.label_equipo3.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo3.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_38.addWidget(self.label_equipo3)
 
@@ -181,10 +174,7 @@ class Ui_MainWindow(object):
         self.label_equipo4.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo4.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_38.addWidget(self.label_equipo4)
 
@@ -226,10 +216,7 @@ class Ui_MainWindow(object):
         self.label_equipo5.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo5.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_39.addWidget(self.label_equipo5)
 
@@ -243,10 +230,7 @@ class Ui_MainWindow(object):
         self.label_equipo6.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo6.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_39.addWidget(self.label_equipo6)
 
@@ -288,10 +272,7 @@ class Ui_MainWindow(object):
         self.label_equipo7.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo7.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_40.addWidget(self.label_equipo7)
 
@@ -305,10 +286,7 @@ class Ui_MainWindow(object):
         self.label_equipo8.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo8.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_40.addWidget(self.label_equipo8)
 
@@ -355,10 +333,7 @@ class Ui_MainWindow(object):
         self.label_cuartos1.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_34.addWidget(self.label_cuartos1)
 
@@ -372,10 +347,7 @@ class Ui_MainWindow(object):
         self.label_cuartos2.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_34.addWidget(self.label_cuartos2)
 
@@ -417,10 +389,7 @@ class Ui_MainWindow(object):
         self.label_cuartos3.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos3.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_35.addWidget(self.label_cuartos3)
 
@@ -434,10 +403,7 @@ class Ui_MainWindow(object):
         self.label_cuartos4.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos4.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_35.addWidget(self.label_cuartos4)
 
@@ -493,10 +459,7 @@ class Ui_MainWindow(object):
         self.label_semi1.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_semi1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_31.addWidget(self.label_semi1)
 
@@ -510,10 +473,7 @@ class Ui_MainWindow(object):
         self.label_semi2.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_semi2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_31.addWidget(self.label_semi2)
 
@@ -562,10 +522,7 @@ class Ui_MainWindow(object):
         self.label_final1.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_final1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_32.addWidget(self.label_final1)
 
@@ -584,10 +541,7 @@ class Ui_MainWindow(object):
         self.label_final2.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_final2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_32.addWidget(self.label_final2)
 
@@ -634,10 +588,7 @@ class Ui_MainWindow(object):
         self.label_semi3.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_semi3.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_24.addWidget(self.label_semi3)
 
@@ -651,10 +602,7 @@ class Ui_MainWindow(object):
         self.label_semi4.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_semi4.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_24.addWidget(self.label_semi4)
 
@@ -708,10 +656,7 @@ class Ui_MainWindow(object):
         self.label_cuartos5.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos5.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_42.addWidget(self.label_cuartos5)
 
@@ -725,10 +670,7 @@ class Ui_MainWindow(object):
         self.label_cuartos6.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos6.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_42.addWidget(self.label_cuartos6)
 
@@ -770,10 +712,7 @@ class Ui_MainWindow(object):
         self.label_cuartos7.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos7.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_43.addWidget(self.label_cuartos7)
 
@@ -787,10 +726,7 @@ class Ui_MainWindow(object):
         self.label_cuartos8.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_cuartos8.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_43.addWidget(self.label_cuartos8)
 
@@ -842,10 +778,7 @@ class Ui_MainWindow(object):
         self.label_equipo9.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo9.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_26.addWidget(self.label_equipo9)
 
@@ -859,10 +792,7 @@ class Ui_MainWindow(object):
         self.label_equipo10.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo10.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_26.addWidget(self.label_equipo10)
 
@@ -904,10 +834,7 @@ class Ui_MainWindow(object):
         self.label_equipo11.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo11.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_27.addWidget(self.label_equipo11)
 
@@ -921,10 +848,7 @@ class Ui_MainWindow(object):
         self.label_equipo12.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo12.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_27.addWidget(self.label_equipo12)
 
@@ -966,10 +890,7 @@ class Ui_MainWindow(object):
         self.label_equipo13.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo13.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_28.addWidget(self.label_equipo13)
 
@@ -983,10 +904,7 @@ class Ui_MainWindow(object):
         self.label_equipo14.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo14.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_28.addWidget(self.label_equipo14)
 
@@ -1028,10 +946,7 @@ class Ui_MainWindow(object):
         self.label_equipo15.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo15.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_29.addWidget(self.label_equipo15)
 
@@ -1045,10 +960,7 @@ class Ui_MainWindow(object):
         self.label_equipo16.setStyleSheet(u"background-color: rgb(38, 126, 126);\n"
 "color: rgb(255, 160, 6);\n"
 "border: 2px solid #FFFFFF;\n"
-"border-radius: 10px;\n"
-"font-size: 10pt;\n"
-"font-weight: bold;")
-        self.label_equipo16.setAlignment(Qt.AlignmentFlag.AlignCenter)
+"border-radius: 10px;")
 
         self.verticalLayout_29.addWidget(self.label_equipo16)
 
@@ -1112,6 +1024,7 @@ class Ui_MainWindow(object):
         self.menuListados.addAction(self.actionCalendario)
         self.menuGeston_torneo.addAction(self.actionCrear_partido)
         self.menuGeston_torneo.addAction(self.actionInicio_Partido)
+        self.menuGeston_torneo.addAction(self.actionInformes)
         self.menuAyuda.addAction(self.actionGuia)
         self.menuAyuda.addAction(self.actionAcerca_de)
         self.toolBar.addAction(self.actionInicio)
@@ -1138,6 +1051,7 @@ class Ui_MainWindow(object):
         self.actionAcerca_de.setText(QCoreApplication.translate("MainWindow", u"Acerca de...", None))
         self.actionCalendario.setText(QCoreApplication.translate("MainWindow", u"Calendario", None))
         self.actionInicio.setText(QCoreApplication.translate("MainWindow", u"Inicio", None))
+        self.actionInformes.setText(QCoreApplication.translate("MainWindow", u"Informes", None))
         self.titulo.setText(QCoreApplication.translate("MainWindow", u"Torneo 2025-2026", None))
         self.label_equipo1.setText("")
         self.label_equipo2.setText("")

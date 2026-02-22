@@ -1481,6 +1481,7 @@ border-radius: 10px;</string>
     </property>
     <addaction name="actionCrear_partido"/>
     <addaction name="actionInicio_Partido"/>
+    <addaction name="actionInformes"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
@@ -1572,6 +1573,11 @@ border-radius: 10px;</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionInformes">
+   <property name="text">
+    <string>Informes</string>
    </property>
   </action>
  </widget>
